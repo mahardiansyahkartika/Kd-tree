@@ -3,6 +3,8 @@
 /// author:
 /// Mahardiansyah Kartika - mkartika@andrew.cmu.edu
 
+#include <vector>
+
 namespace uber
 {
 namespace exercise
@@ -22,18 +24,24 @@ typedef double real_t;
 class VectorN
 {
 public:
-    VectorN();
+    VectorN(std::vector<real_t>& list);
     ~VectorN();
 
+    /// set the value to specific index
     void SetVal(size_t idx, real_t val);
+
+    /// return the value from specific index
     real_t GetVal(size_t idx);
+
+    /// return vector dimension
+    size_t GetN();
 
 private:
     /// vector dimension
-    size_t n;
+    size_t n = 0;
 
     /// components of this vector
-    real_t *val;
+    real_t *vals = NULL;
 };
 };
 }
