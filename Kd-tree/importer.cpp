@@ -14,9 +14,9 @@ namespace uber
 {
 namespace exercise
 {
-    std::vector<math::VectorN> Importer::csv_to_vector(const char* filename)
+    std::vector<math::VectorN*> Importer::csv_to_vector(const char* filename)
     {
-        std::vector<math::VectorN> res;
+        std::vector<math::VectorN*> res;
 
         std::ifstream data(filename);
         std::string line;
@@ -41,24 +41,10 @@ namespace exercise
             }
 
             /// create point
-            math::VectorN point = math::VectorN(temp);
+            math::VectorN* point = new math::VectorN(temp);
             /// insert to list
             res.push_back(point);
-
-            for (size_t j = 0; j < point.GetN(); ++j)
-                std::cout << point.GetVal(j) << " ";
-            std::cout << std::endl;
         }
-
-        /*
-        for (size_t i = 0; i < res.size(); ++i)
-        {
-            std::cout << i + 1 << ": ";
-            for (size_t j = 0; j < res[i].GetN(); ++j)
-                std::cout << res[i].GetVal(j) << " ";
-            std::cout << std::endl;
-        }
-        */
 
         return res;
     }

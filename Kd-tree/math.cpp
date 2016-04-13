@@ -34,23 +34,22 @@ namespace math
 
     VectorN::~VectorN()
     {
-        if (vals != NULL)
-            delete[] vals;
+        delete[] vals;
     }
 
-    void VectorN::SetVal(size_t idx, real_t val)
+    void VectorN::set_val(size_t idx, real_t val)
     {
         assert(("[Error] index out of range", (idx >= 0 && idx < n)));
         vals[idx] = val;
     }
 
-    real_t VectorN::GetVal(size_t idx)
+    real_t VectorN::get_val(size_t idx)
     {
         assert(("[Error] index out of range", (idx >= 0 && idx < n)));
         return vals[idx];
     }
 
-    size_t VectorN::GetN()
+    size_t VectorN::get_n()
     {
         return n;
     }

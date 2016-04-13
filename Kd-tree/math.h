@@ -28,13 +28,13 @@ public:
     ~VectorN();
 
     /// set the value to specific index
-    void SetVal(size_t idx, real_t val);
+    void set_val(size_t idx, real_t val);
 
     /// return the value from specific index
-    real_t GetVal(size_t idx);
+    real_t get_val(size_t idx);
 
     /// return vector dimension
-    size_t GetN();
+    size_t get_n();
 
 private:
     /// vector dimension
