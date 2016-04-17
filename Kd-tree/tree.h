@@ -52,7 +52,10 @@ public:
     /// root of the tree
     KdTreeNode* root;
     /// list of point
-    std::vector<math::VectorN*> data_list;    
+    std::vector<math::VectorN*> data_list;
+
+    /// search for the nearest neighbor in the tree given a query point
+    size_t search_nearest_neighbor(math::VectorN* point);
     
 private:
     /// delete tree

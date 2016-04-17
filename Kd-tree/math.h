@@ -47,7 +47,7 @@ private:
     /// components of this vector
     real_t* vals = NULL;
 };
-};
+}
 }
 }
 

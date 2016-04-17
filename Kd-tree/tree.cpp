@@ -126,6 +126,31 @@ KdTreeNode* KdTree::build(size_t* index_list, size_t index_size, size_t depth)
     return node;
 }
 
+size_t KdTree::search_nearest_neighbor(math::VectorN* point)
+{
+    KdTreeNode* node = root;
+
+    // descent through the tree 
+    while(node->type == KdTreeNodeType::BRANCH)
+    {
+        if (point->get_val(node->split_axis) < node->threshold)
+            node = node->left.node;
+        else
+            node = node->right.node;
+    }
+
+    size_t res;
+    // find the nearest neighbors
+    if (node->left.data_size > 1)
+    {
+        
+    }
+    else
+        res = node->right.data_ref[0];
+
+    return res;
+}
+
 size_t KdTree::find_longest_axis(size_t* index_list, size_t index_size)
 {
     math::VectorN min = math::VectorN(data_list[index_list[0]]);
