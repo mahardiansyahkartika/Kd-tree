@@ -24,10 +24,10 @@ namespace math
             exit(EXIT_FAILURE);
         }
 
-        /// set size
+        // set size
         n = vals.size();
 
-        /// copy the values
+        // copy the values
         for (size_t i = 0; i < n; ++i)
             this->vals[i] = vals[i];
     }
@@ -39,13 +39,13 @@ namespace math
 
     void VectorN::set_val(size_t idx, real_t val)
     {
-        assert(("[Error] index out of range", (idx >= 0 && idx < n)));
+        assert(idx >= 0 && idx < n);
         vals[idx] = val;
     }
 
     real_t VectorN::get_val(size_t idx)
     {
-        assert(("[Error] index out of range", (idx >= 0 && idx < n)));
+        assert(idx >= 0 && idx < n);
         return vals[idx];
     }
 

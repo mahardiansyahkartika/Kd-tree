@@ -21,7 +21,7 @@ namespace exercise
         std::ifstream data(filename);
         std::string line;
 
-        /// temporary container to hold value per line
+        // temporary container to hold value per line
         std::vector<math::real_t> temp;
 
         while (std::getline(data, line))
@@ -29,7 +29,7 @@ namespace exercise
             std::stringstream lineStream(line);
             std::string cell;
 
-            /// clear the container
+            // clear the container
             temp.clear();
             while (std::getline(lineStream, cell, ','))
             {
@@ -40,9 +40,9 @@ namespace exercise
 #endif
             }
 
-            /// create point
+            // create point
             math::VectorN* point = new math::VectorN(temp);
-            /// insert to list
+            // insert to list
             res.push_back(point);
         }
 
