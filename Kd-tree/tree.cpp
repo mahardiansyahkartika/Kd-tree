@@ -139,14 +139,33 @@ size_t KdTree::search_nearest_neighbor(math::VectorN* point)
             node = node->right.node;
     }
 
-    size_t res;
     // find the nearest neighbors
+    size_t res = node->right.data_ref[0];
+    // if more than one point in this node
+    // then check with the rest of the points
     if (node->left.data_size > 1)
     {
+        math::real_t squared_dist = math::VectorN::squared_distance(
+            *point, *(data_list[res]));
 
+        // compare distance with other points
+        for (size_t i = 1; i < node->left.data_size; ++i)
+        {
+            // find new index
+            size_t curr_res = node->right.data_ref[i];
+            // find new square distance
+            math::real_t curr_squared_dist = math::VectorN::squared_distance(
+                *point, *(data_list[curr_res]));
+
+            // compare
+            if (squared_dist > curr_squared_dist)
+            {
+                // update
+                squared_dist = curr_squared_dist;
+                res = curr_res;
+            }
+        }
     }
-    else
-        res = node->right.data_ref[0];
 
     return res;
 }
