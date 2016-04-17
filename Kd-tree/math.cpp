@@ -61,16 +61,69 @@ void VectorN::set_val(size_t idx, real_t val)
     vals[idx] = val;
 }
 
-real_t VectorN::get_val(size_t idx)
+real_t VectorN::get_val(size_t idx) const
 {
     assert(idx >= 0 && idx < n);
     return vals[idx];
 }
 
-size_t VectorN::get_n()
+size_t VectorN::get_n() const
 {
     return n;
 }
-};
+
+VectorN VectorN::operator+(const VectorN& v) const
+{
+    assert(get_n() == v.get_n());
+    std::vector<real_t> vals = std::vector<real_t>(get_n());
+    for (size_t i = 0; i < get_n(); ++i)
+        vals[i] = get_val(i) + v.get_val(i);
+
+    return VectorN(vals);
+}
+
+VectorN VectorN::operator-(const VectorN& v) const
+{
+    assert(get_n() == v.get_n());
+    std::vector<real_t> vals = std::vector<real_t>(get_n());
+    for (size_t i = 0; i < get_n(); ++i)
+        vals[i] = get_val(i) - v.get_val(i);
+
+    return VectorN(vals);
+}
+
+VectorN VectorN::operator*(real_t s) const
+{
+    std::vector<real_t> vals = std::vector<real_t>(get_n());
+    for (size_t i = 0; i < get_n(); ++i)
+        vals[i] = get_val(i) * s;
+
+    return VectorN(vals);    
+}
+
+real_t VectorN::squared_length(const VectorN& v)
+{
+    real_t res = 0;
+    for (size_t i = 0; i < v.get_n(); ++i)
+        res += v.get_val(i) * v.get_val(i);
+
+    return res;
+}
+
+real_t VectorN::length(const VectorN& v)
+{
+    return sqrt(squared_length(v));
+}
+
+real_t VectorN::distance(const VectorN& lhs, const VectorN& rhs)
+{
+    return length(lhs - rhs);
+}
+
+real_t VectorN::squared_distance(const VectorN& lhs, const VectorN& rhs)
+{
+    return squared_length(lhs - rhs);
+}
+}
 }
 }

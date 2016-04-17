@@ -29,6 +29,13 @@ int main(int argc, char* argv[])
         tree->data_list[closest_index_list[index]]->get_val(1),
         tree->data_list[closest_index_list[index]]->get_val(2));
 
+    std::cout << "square_dist: " << uber::exercise::math::VectorN::squared_distance(
+        *(query_list[index]), *(tree->data_list[closest_index_list[index]])) << 
+        std::endl;
+    std::cout << "dist: " << uber::exercise::math::VectorN::distance(
+        *(query_list[index]), *(tree->data_list[closest_index_list[index]])) << 
+        std::endl;
+
     // print value
     std::cout << "total_input: " << tree->data_list.size() << std::endl;
 
