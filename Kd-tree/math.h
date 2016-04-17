@@ -3,6 +3,9 @@
 /// author:
 /// Mahardiansyah Kartika - mkartika@andrew.cmu.edu
 
+#ifndef UBER_EXERCISE_MATH_H
+#define UBER_EXERCISE_MATH_H
+
 #include <vector>
 
 namespace uber
@@ -24,7 +27,8 @@ typedef double real_t;
 class VectorN
 {
 public:
-    VectorN(std::vector<real_t>& list);
+    VectorN(std::vector<real_t>& vals);
+    VectorN(VectorN* point);
     ~VectorN();
 
     /// set the value to specific index
@@ -41,8 +45,10 @@ private:
     size_t n = 0;
 
     /// components of this vector
-    real_t *vals = NULL;
+    real_t* vals = NULL;
 };
 };
 }
 }
+
+#endif /// UBER_EXERCISE_MATH_H

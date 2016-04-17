@@ -15,44 +15,61 @@ namespace exercise
 {
 namespace math
 {
-    VectorN::VectorN(std::vector<real_t>& vals)
+VectorN::VectorN(std::vector<real_t>& vals)
+{
+    this->vals = new (std::nothrow) real_t[vals.size()];
+    if (this->vals == nullptr)
     {
-        this->vals = new (std::nothrow) real_t[vals.size()];
-        if (this->vals == nullptr)
-        {
-            std::cout << "[Error] memory could not be allocated" << std::endl;
-            exit(EXIT_FAILURE);
-        }
-
-        // set size
-        n = vals.size();
-
-        // copy the values
-        for (size_t i = 0; i < n; ++i)
-            this->vals[i] = vals[i];
+        std::cout << "[Error] memory could not be allocated" << std::endl;
+        exit(EXIT_FAILURE);
     }
 
-    VectorN::~VectorN()
+    // set size
+    n = vals.size();
+
+    // copy the values
+    for (size_t i = 0; i < n; ++i)
+        this->vals[i] = vals[i];
+}
+
+VectorN::VectorN(VectorN* point)
+{
+    this->vals = new (std::nothrow) real_t[point->get_n()];
+    if (this->vals == nullptr)
     {
-        delete[] vals;
+        std::cout << "[Error] memory could not be allocated" << std::endl;
+        exit(EXIT_FAILURE);
     }
 
-    void VectorN::set_val(size_t idx, real_t val)
-    {
-        assert(idx >= 0 && idx < n);
-        vals[idx] = val;
-    }
+    // set size
+    n = point->get_n();
 
-    real_t VectorN::get_val(size_t idx)
-    {
-        assert(idx >= 0 && idx < n);
-        return vals[idx];
-    }
+    // copy the values
+    for (size_t i = 0; i < n; ++i)
+        this->vals[i] = point->vals[i];
+}
 
-    size_t VectorN::get_n()
-    {
-        return n;
-    }
+VectorN::~VectorN()
+{
+    delete[] vals;
+}
+
+void VectorN::set_val(size_t idx, real_t val)
+{
+    assert(idx >= 0 && idx < n);
+    vals[idx] = val;
+}
+
+real_t VectorN::get_val(size_t idx)
+{
+    assert(idx >= 0 && idx < n);
+    return vals[idx];
+}
+
+size_t VectorN::get_n()
+{
+    return n;
+}
 };
 }
 }

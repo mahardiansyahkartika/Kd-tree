@@ -3,6 +3,9 @@
 /// author:
 /// Mahardiansyah Kartika - mkartika@andrew.cmu.edu
 
+#ifndef UBER_EXERCISE_IMPORTER_H
+#define UBER_EXERCISE_IMPORTER_H
+
 #include "math.h"
 
 namespace uber
@@ -17,3 +20,5 @@ public:
 };
 }
 }
+
+#endif /// UBER_EXERCISE_IMPORTER_H
