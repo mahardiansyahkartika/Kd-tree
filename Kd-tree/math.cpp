@@ -51,7 +51,8 @@ VectorN::VectorN(VectorN* point)
 
 VectorN::~VectorN()
 {
-    delete[] vals;
+    if (vals != NULL)
+        delete[] vals;
 }
 
 void VectorN::set_val(size_t idx, real_t val)

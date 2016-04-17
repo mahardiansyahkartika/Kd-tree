@@ -6,15 +6,13 @@
 #ifndef UBER_EXERCISE_TREE_H
 #define UBER_EXERCISE_TREE_H
 
-#include <iostream>
-
 #include "math.h"
 
 namespace uber
 {
 namespace exercise
 {
-#define MAX_TREE_DEPTH 20
+#define MAX_TREE_DEPTH 30
 
 enum KdTreeNodeType { BRANCH, LEAF };
 
@@ -56,7 +54,9 @@ public:
     /// list of point
     std::vector<math::VectorN*> data_list;    
     
-private:        
+private:
+    /// delete tree
+    void delete_tree(KdTreeNode* node);
     /// recursively build the tree
     KdTreeNode* build(size_t* index_list, size_t index_size, size_t depth);
     /// finding the axis with the largest range

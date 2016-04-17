@@ -31,7 +31,34 @@ KdTree::KdTree(std::vector<math::VectorN*>& points)
     delete[] index_list;
 }
 
-KdTree::~KdTree() { }
+KdTree::~KdTree() 
+{ 
+    // delete all nodes in the tree
+    delete_tree(root);
+
+    // delete all data_list
+    for (size_t i = 0; i < data_list.size(); ++i)
+        delete data_list[i];
+}
+
+void KdTree::delete_tree(KdTreeNode* node)
+{
+    if (node != NULL)
+    {
+        if (node->type == KdTreeNodeType::BRANCH)
+        {
+            // delete the node post order
+            delete_tree(node->left.node);
+            delete_tree(node->right.node);
+        }
+        else if (node->type == KdTreeNodeType::LEAF)
+        {
+            delete[] node->right.data_ref;
+        }
+
+        delete node;
+    }
+}
 
 KdTreeNode* KdTree::build(size_t* index_list, size_t index_size, size_t depth)
 {
