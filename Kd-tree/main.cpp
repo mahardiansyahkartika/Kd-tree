@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "importer.h"
+#include "exporter.h"
 #include "tree.h"
 
 int main(int argc, char* argv[])
@@ -38,6 +39,9 @@ int main(int argc, char* argv[])
 
     // print value
     std::cout << "total_input: " << tree->data_list.size() << std::endl;
+
+    // export to csv
+    uber::exercise::Exporter::vector_to_csv("result.csv", closest_index_list);
 
     /*
     for (size_t i = 0; i < tree->data_list.size(); ++i)

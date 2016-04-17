@@ -21,29 +21,41 @@ std::vector<math::VectorN*> Importer::csv_to_vector(const char* filename)
     std::ifstream data(filename);
     std::string line;
 
-    // temporary container to hold value per line
-    std::vector<math::real_t> temp;
-
-    while (std::getline(data, line))
+    if (data.is_open())
     {
-        std::stringstream lineStream(line);
-        std::string cell;
+        // temporary container to hold value per line
+        std::vector<math::real_t> temp;
 
-        // clear the container
-        temp.clear();
-        while (std::getline(lineStream, cell, ','))
+        while (std::getline(data, line))
         {
+            std::stringstream lineStream(line);
+            std::string cell;
+
+            // clear the container
+            temp.clear();
+            while (std::getline(lineStream, cell, ','))
+            {
 #ifdef REAL_FLOAT
-            temp.push_back(std::stof(cell));
+                temp.push_back(std::stof(cell));
 #else
-            temp.push_back(std::stod(cell));
+                temp.push_back(std::stod(cell));
 #endif
+            }
+
+            // create point
+            math::VectorN* point = new math::VectorN(temp);
+            // insert to list
+            res.push_back(point);
         }
 
-        // create point
-        math::VectorN* point = new math::VectorN(temp);
-        // insert to list
-        res.push_back(point);
+        data.close();
+
+        std::cout << "Successfully load " << filename << " file" << std::endl;
+    }
+    else
+    {
+        std::cout << "Unable to open file: " << filename << std::endl;
+        exit(1);
     }
 
     return res;
