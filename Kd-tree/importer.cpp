@@ -161,7 +161,7 @@ void Importer::deserialize(KdTreeNode*& node, std::ifstream& data)
                         std::stringstream cell_stream(cell);
                         std::string ref;
 
-                        while (std::getline(cell_stream, ref, ','))
+                        while (std::getline(cell_stream, ref, ' '))
                         {
                             // store each reference
                             node->right.data_ref[data_size] = std::stoi(ref);
