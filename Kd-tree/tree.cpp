@@ -13,6 +13,8 @@ KdTreeNode::KdTreeNode() { }
 
 KdTreeNode::~KdTreeNode() { }
 
+KdTree::KdTree() { }
+
 KdTree::KdTree(std::vector<math::VectorN*>& points)
 {
     // copy points

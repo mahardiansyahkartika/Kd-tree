@@ -46,6 +46,7 @@ public:
 class KdTree
 {
 public:
+    KdTree();
     KdTree(std::vector<math::VectorN*>& points);
     ~KdTree();
 

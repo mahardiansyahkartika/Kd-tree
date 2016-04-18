@@ -6,7 +6,7 @@
 #ifndef UBER_EXERCISE_IMPORTER_H
 #define UBER_EXERCISE_IMPORTER_H
 
-#include "math.h"
+#include "tree.h"
 
 namespace uber
 {
@@ -17,6 +17,11 @@ class Importer
 public:
     /// import data from .csv file to list of VectorN
     static std::vector<math::VectorN*> csv_to_vector(const char* filename);
+    /// import tree data
+    static KdTree* file_to_tree(const char* filename);
+
+private:
+    static void deserialize(KdTreeNode* &node, std::ifstream& data);
 };
 }
 }
