@@ -42,6 +42,8 @@ void Exporter::tree_to_file(const char* filename, KdTree* tree)
 
     if (data.is_open())
     {
+        // write math::real_t in scientific format
+        data << std::scientific;
         // write number of points
         data << tree->data_list.size() << "\n";
         // write all of the points data with a ',' for delimiter

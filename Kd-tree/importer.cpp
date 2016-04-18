@@ -204,9 +204,9 @@ void Importer::deserialize(KdTreeNode*& node, std::ifstream& data)
                     {
                         // threshold
 #ifdef REAL_FLOAT
-                    node->threshold = std::stof(cell);
+                        node->threshold = std::stof(cell);
 #else
-                    tnode->threshold = std::stod(cell);
+                        node->threshold = std::stod(cell);
 #endif
                     }
                     else
