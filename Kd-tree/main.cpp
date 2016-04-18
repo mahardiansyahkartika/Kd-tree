@@ -27,14 +27,7 @@ int main(int argc, char* argv[])
     uber::exercise::KdTree* tree = uber::exercise::Importer::file_to_tree("tree");
     // find the corresponding closest index of the sample data for each query point
     std::vector<size_t> closest_index_list;
-    for (size_t i = 0; i < query_list.size(); ++i)
-    {
-        size_t ref;
-        uber::exercise::math::real_t dist = 
-            std::numeric_limits<uber::exercise::math::real_t>::infinity();
-        tree->search_nearest_neighbor(query_list[i], tree->root, ref, dist);
-        closest_index_list.push_back(ref);
-    }
+    tree->search_closest_index(closest_index_list, query_list);
     // export to csv
     uber::exercise::Exporter::vector_to_csv("result new.csv", closest_index_list);
     // delete tree

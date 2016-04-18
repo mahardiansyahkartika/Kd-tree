@@ -55,17 +55,25 @@ public:
     /// list of point
     std::vector<math::VectorN*> data_list;
 
+    /// find the corresponding closest index of the sample data 
+    /// for each query point and put the result on closest_index_list
+    void search_closest_index(std::vector<size_t>& closest_index_list, 
+        const std::vector<uber::exercise::math::VectorN*>& query_list);
+
+private:
     /// search for the nearest neighbor in the tree given a query point
     void search_nearest_neighbor(math::VectorN* point, KdTreeNode* node, 
         size_t& ref_point, math::real_t& dist);
 
-private:
     /// delete tree
     void delete_tree(KdTreeNode* node);
+
     /// recursively build the tree
     KdTreeNode* build(size_t* index_list, size_t index_size, size_t depth);
+    
     /// finding the axis with the largest range
     size_t find_longest_axis(size_t* index_list, size_t index_size);
+    
     /// finding the split point to be the median
     math::real_t find_threshold(size_t* index_list, size_t index_size, 
         size_t split_axis);

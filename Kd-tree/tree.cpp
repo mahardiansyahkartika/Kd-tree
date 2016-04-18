@@ -172,6 +172,25 @@ void KdTree::search_nearest_neighbor(math::VectorN* point, KdTreeNode* node,
     }
 }
 
+void KdTree::search_closest_index(std::vector<size_t>& closest_index_list, 
+    const std::vector<uber::exercise::math::VectorN*>& query_list)
+{
+    // clear the list
+    closest_index_list.clear();
+
+    for (size_t i = 0; i < query_list.size(); ++i)
+    {
+        size_t ref;
+        math::real_t dist = 
+            std::numeric_limits<uber::exercise::math::real_t>::infinity();
+        
+        search_nearest_neighbor(query_list[i], root, ref, dist);
+
+        // add the result
+        closest_index_list.push_back(ref);
+    }
+}
+
 size_t KdTree::find_longest_axis(size_t* index_list, size_t index_size)
 {
     math::VectorN min = math::VectorN(data_list[index_list[0]]);
