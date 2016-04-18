@@ -83,7 +83,7 @@ KdTree* Importer::file_to_tree(const char* filename)
         // temporary container to hold value per line
         std::vector<math::real_t> temp;
         // read points data
-        for (size_t i = 0; i < points_size; ++i)
+        for (int i = 0; i < points_size; ++i)
         {
             if (std::getline(data, line))
             {
