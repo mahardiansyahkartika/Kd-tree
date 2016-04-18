@@ -55,8 +55,9 @@ public:
     std::vector<math::VectorN*> data_list;
 
     /// search for the nearest neighbor in the tree given a query point
-    size_t search_nearest_neighbor(math::VectorN* point);
-    
+    void search_nearest_neighbor(math::VectorN* point, KdTreeNode* node, 
+        size_t& ref_point, math::real_t& dist);
+
 private:
     /// delete tree
     void delete_tree(KdTreeNode* node);

@@ -126,48 +126,48 @@ KdTreeNode* KdTree::build(size_t* index_list, size_t index_size, size_t depth)
     return node;
 }
 
-size_t KdTree::search_nearest_neighbor(math::VectorN* point)
+void KdTree::search_nearest_neighbor(math::VectorN* point, KdTreeNode* node, 
+        size_t& ref_point, math::real_t& dist)
 {
-    KdTreeNode* node = root;
-
-    // descent through the tree 
-    while(node->type == KdTreeNodeType::BRANCH)
+    // leaf case
+    if (node->type == KdTreeNodeType::LEAF)
     {
-        if (point->get_val(node->split_axis) < node->threshold)
-            node = node->left.node;
-        else
-            node = node->right.node;
-    }
-
-    // find the nearest neighbors
-    size_t res = node->right.data_ref[0];
-    // if more than one point in this node
-    // then check with the rest of the points
-    if (node->left.data_size > 1)
-    {
-        math::real_t squared_dist = math::VectorN::squared_distance(
-            *point, *(data_list[res]));
-
-        // compare distance with other points
-        for (size_t i = 1; i < node->left.data_size; ++i)
+        for (size_t i = 0; i < node->left.data_size; ++i)
         {
-            // find new index
             size_t curr_res = node->right.data_ref[i];
-            // find new square distance
-            math::real_t curr_squared_dist = math::VectorN::squared_distance(
-                *point, *(data_list[curr_res]));
+            math::real_t new_dist = 
+                math::VectorN::distance(*point, *(data_list[curr_res]));        
 
-            // compare
-            if (squared_dist > curr_squared_dist)
+            if (new_dist < dist)
             {
-                // update
-                squared_dist = curr_squared_dist;
-                res = curr_res;
+                dist = new_dist;
+                ref_point = curr_res;
             }
         }
     }
+    else
+    {
+        bool is_search_left = false;
+        if (point->get_val(node->split_axis) < node->threshold)
+            is_search_left = true;
 
-    return res;
+        // left
+        if (is_search_left)
+        {
+            if (point->get_val(node->split_axis) - dist < node->threshold)
+                search_nearest_neighbor(point, node->left.node, ref_point, dist);
+            if (point->get_val(node->split_axis) + dist >= node->threshold)
+                search_nearest_neighbor(point, node->right.node, ref_point, dist);
+        }
+        // right
+        else
+        {
+            if (point->get_val(node->split_axis) + dist >= node->threshold)
+                search_nearest_neighbor(point, node->right.node, ref_point, dist);
+            if (point->get_val(node->split_axis) - dist < node->threshold)
+                search_nearest_neighbor(point, node->left.node, ref_point, dist);
+        }
+    }
 }
 
 size_t KdTree::find_longest_axis(size_t* index_list, size_t index_size)
