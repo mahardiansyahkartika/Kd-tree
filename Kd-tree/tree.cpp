@@ -230,22 +230,38 @@ size_t KdTree::find_longest_axis(size_t* index_list, size_t index_size)
 math::real_t KdTree::find_threshold(size_t* index_list, size_t index_size,
     size_t split_axis)
 {
-    // create list of value in split axis
-    std::vector<math::real_t> axis_val_list;
-    // insert the value
-    for (size_t i = 0; i < index_size; ++i)
-        axis_val_list.push_back(data_list[index_list[i]]->get_val(split_axis));
-    // sort the value
-    std::sort(axis_val_list.begin(), axis_val_list.end());
+    if (split_type == SplitType::MEDIAN)
+    {
+        // create list of value in split axis
+        std::vector<math::real_t> axis_val_list;
+        // insert the value
+        for (size_t i = 0; i < index_size; ++i)
+            axis_val_list.push_back(data_list[index_list[i]]->get_val(split_axis));
+        // sort the value
+        std::sort(axis_val_list.begin(), axis_val_list.end());
 
-    // find median value
-    size_t mid_index = axis_val_list.size() / 2;
-    // odd
-    if (axis_val_list.size() % 2)
-        return axis_val_list[mid_index];    
-    // even
-    return 
-        (axis_val_list[mid_index - 1] + axis_val_list[mid_index]) / (math::real_t)2.0;
+        // find median value
+        size_t mid_index = axis_val_list.size() / 2;
+        // odd
+        if (axis_val_list.size() % 2)
+            return axis_val_list[mid_index];
+        // even
+        return
+            (axis_val_list[mid_index - 1] + axis_val_list[mid_index]) / (math::real_t)2.0;
+    }
+    // split_type == SplitType::MEAN
+    else
+    {
+        size_t size = 0;
+        math::real_t total_value = 0;
+        for (size_t i = 0; i < index_size; ++i)
+        {
+            total_value += data_list[index_list[i]]->get_val(split_axis);
+            size++;
+        }
+
+        return total_value / (math::real_t) size;
+    }
 }
 }
 }

@@ -57,10 +57,10 @@ public:
 
 private:
     /// vector dimension
-    size_t n = 0;
+    size_t n;
 
     /// components of this vector
-    real_t* vals = NULL;
+    real_t* vals;
 };
 }
 }

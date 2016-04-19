@@ -15,6 +15,7 @@ namespace exercise
 #define MAX_TREE_DEPTH 30
 
 enum KdTreeNodeType { BRANCH, LEAF };
+enum SplitType { MEDIAN, MEAN };
 
 class KdTreeNode
 {
@@ -49,6 +50,8 @@ public:
     KdTree();
     KdTree(std::vector<math::VectorN*>& points);
     ~KdTree();
+
+    SplitType split_type = SplitType::MEDIAN;
 
     /// root of the tree
     KdTreeNode* root;

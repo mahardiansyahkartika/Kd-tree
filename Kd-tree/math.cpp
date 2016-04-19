@@ -17,12 +17,7 @@ namespace math
 {
 VectorN::VectorN(std::vector<real_t>& vals)
 {
-    this->vals = new (std::nothrow) real_t[vals.size()];
-    if (this->vals == nullptr)
-    {
-        std::cout << "[Error] memory could not be allocated" << std::endl;
-        exit(EXIT_FAILURE);
-    }
+    this->vals = new real_t[vals.size()];
 
     // set size
     n = vals.size();
@@ -34,12 +29,7 @@ VectorN::VectorN(std::vector<real_t>& vals)
 
 VectorN::VectorN(VectorN* point)
 {
-    this->vals = new (std::nothrow) real_t[point->get_n()];
-    if (this->vals == nullptr)
-    {
-        std::cout << "[Error] memory could not be allocated" << std::endl;
-        exit(EXIT_FAILURE);
-    }
+    this->vals = new real_t[point->get_n()];
 
     // set size
     n = point->get_n();
