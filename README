@@ -58,7 +58,7 @@ KdTreeProject/  - Directory containing the project
   query_data.csv      - query data for testing
   sample_data.csv     - sample data for testing
 
-  Makefile	          - Compiles build_kdtree and query_kdtree
+  Makefile            - Compiles build_kdtree and query_kdtree
 
-README		            - This file
+README                - This file
 documentation.pdf     - Describes implementation and design decisions
