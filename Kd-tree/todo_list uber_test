@@ -5,13 +5,13 @@ TODO LIST
 //find exact nearest neighbor
 //csv exporter
 //I/O save/load tree
+//create build_kdtree and query_kdtree apps
+//linux style - params, help, etc
+//cmake, vanilla ubuntu
+//bonus and change double/float from params
+//explain why choose float/double for testing
 check stof/stod and write to file in a good format
 handle exception to read and write file
 change delete_new -> to handle exception
-create build_kdtree and query_kdtree apps
 check memory leaks
-linux style - params, help, etc
-cmake, vanilla ubuntu
-bonus and change double/float from params
 good comment and description
-readme and documentation (explain why choose float/double for testing)
