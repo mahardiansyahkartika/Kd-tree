@@ -1,0 +1,64 @@
+**********************
+KdTreeProject
+**********************
+
+KD-tree library for performing efficient nearest neighbor point queries 
+given a prior dataset of points.
+
+***************
+1. Dependencies
+***************
+
+No dependencies.
+Compiled with g++ -std=c++11
+It has been tested on a vanilla Ubuntu 14.04LTS 64-bit linux system.
+
+******************
+2. Helper programs
+******************
+
+To build build_kdtree and query_kdtree type:
+
+    unix> make
+
+Example usages:
+
+build_kdtree
+    usage   : build_kdtree [dataset_file] [exported_tree_location]
+
+    unix> ./build_kdtree sample_data.csv tree
+          Successfully import 'sample_data.csv' file
+          Successfully export 'tree' file
+
+query_kdtree
+    usage   : query_kdtree [query_file] [exported_tree_file] [output_file]
+    
+    unix> ./query_kdtree query_data.csv tree result.csv
+          Successfully import 'query_data.csv' file
+          Successfully built tree from 'tree' file
+          Successfully export 'result.csv' file
+
+*********
+3. Files:
+*********
+
+KdTreeProject/  - Directory containing the project
+  math.h              - Used to build build_kdtree and query_kdtree
+  math.cpp            - Used to build build_kdtree and query_kdtree
+  tree.h              - Used to build build_kdtree and query_kdtree
+  tree.cpp            - Used to build build_kdtree and query_kdtree
+  importer.h          - Used to build build_kdtree and query_kdtree
+  importer.cpp        - Used to build build_kdtree and query_kdtree
+  exporter.h          - Used to build build_kdtree and query_kdtree
+  exporter.cpp        - Used to build build_kdtree and query_kdtree
+
+  build_kdtree.cpp    - The main build_kdtree program
+  query_kdtree.cpp    - The main query_kdtree program
+
+  query_data.csv      - query data for testing
+  sample_data.csv     - sample data for testing
+
+  Makefile	          - Compiles build_kdtree and query_kdtree
+
+README		            - This file
+documentation.pdf     - Describes implementation and design decisions
