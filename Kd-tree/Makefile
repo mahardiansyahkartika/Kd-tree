@@ -1,9 +1,9 @@
 # Makefile to build build_kdtree and query_kdtree
 
 CXX = g++
-CFLAGS  = -g -Wall
+CFLAGS  = -std=c++11
 
-default: build_kdtree 
+default: build_kdtree query_kdtree
 
 # To create the executable file count we need the object files
 # countwords.o, counter.o, and scanner.o:
